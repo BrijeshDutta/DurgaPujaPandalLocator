@@ -1,5 +1,6 @@
 package com.durgapoojamumbaipune;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,9 +24,9 @@ import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity {
 
-
-    //NEW
-
+    //.........VARIABLE RELATED TO PERSISTENCE.........//
+    static boolean calledAlready = false;
+    
     FirebaseDatabase database;
     DatabaseReference category;
 
@@ -34,6 +35,8 @@ public class Home extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseRecyclerAdapter<City,CityViewHolder> adapter;
+
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,11 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //.....................DATABASE PERSISTENCE............................................//
+        if(!calledAlready){
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            calledAlready = true;
+        }
 
         //Init Firebase
 
@@ -54,7 +62,10 @@ public class Home extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
+        progressDialog = new ProgressDialog(this);
 
+        progressDialog.setMessage("Loading.......");
+        progressDialog.show();
         loadCity();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -74,14 +85,11 @@ public class Home extends AppCompatActivity {
             protected void populateViewHolder(CityViewHolder viewHolder, City model, int position) {
                 viewHolder.txtCityName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.cityImageView);
-
+                progressDialog.dismiss();
                 final City clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        //Toast.makeText(Home.this,"" +clickItem.getName(),Toast.LENGTH_SHORT).show();
-
-                        //Get category and send it to new Activity
 
                         Intent foodList = new Intent(Home.this, PoojaPandalList.class);
                         foodList.putExtra("CityId",adapter.getRef(position).getKey());
