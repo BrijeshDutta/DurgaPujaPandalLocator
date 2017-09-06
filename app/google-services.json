@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "991470522750",
+    "firebase_url": "https://durgapoojamumbaipune.firebaseio.com",
+    "project_id": "durgapoojamumbaipune",
+    "storage_bucket": "durgapoojamumbaipune.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991470522750:android:40874e382c568368",
+        "android_client_info": {
+          "package_name": "com.durgapoojamumbaipune"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991470522750-p1ft97m212med3qc15i6nkirs80o3747.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.durgapoojamumbaipune",
+            "certificate_hash": "49f2728abebbc0add96a773536686e40e5b89822"
+          }
+        },
+        {
+          "client_id": "991470522750-10746e80qr1lc0t81m5bsrhr8absstve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB091AgeTJ59klXOqHAk6SvXUaTy2hIHM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991470522750-10746e80qr1lc0t81m5bsrhr8absstve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
