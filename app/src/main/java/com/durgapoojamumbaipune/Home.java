@@ -1,6 +1,8 @@
 package com.durgapoojamumbaipune;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +29,11 @@ import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity {
 
+    //UI Compoenents for adding a person to trip
+    AutoCompleteTextView actvPersonName,actvPersonMobileNo,actvPersonEmailId,actvPersonDeposit;
     //.........VARIABLE RELATED TO PERSISTENCE.........//
     static boolean calledAlready = false;
-    
+
     FirebaseDatabase database;
     DatabaseReference category;
 
@@ -72,10 +79,55 @@ public class Home extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                requestToAddPandal();
             }
         });
+    }
+
+    private void requestToAddPandal() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.request_to_addpoojapandal, null);  // this line
+        builder.setView(v);
+        initializeDailogUiComponents(v);
+
+        // Set up the buttons
+        builder.setPositiveButton("Ok",null);
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        final AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button b = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        getUserEnteredValuesForAddingPerson();
+//                        if(validateUserEnteredValues()){
+//                            addPersonDataToPersonObject();
+//                            createAddPersonCardView();
+//                            dialog.dismiss();
+//                        }
+                    }
+                });
+            }
+        });
+        dialog.show();
+
+    }
+
+    private void initializeDailogUiComponents(View v) {
+        actvPersonName = (AutoCompleteTextView) v.findViewById(R.id.actvPersonName);
+        actvPersonMobileNo = (AutoCompleteTextView) v.findViewById(R.id.actvPersonMobileNo);
+        actvPersonEmailId = (AutoCompleteTextView) v.findViewById(R.id.actvPersonEmailId);
+        actvPersonDeposit = (AutoCompleteTextView) v.findViewById(R.id.actvPersonDeposit);
     }
 
     private void loadCity() {
