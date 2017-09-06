@@ -41,7 +41,20 @@ tools:context="com.durgapoojamumbaipune.PoojaPandaDetail">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.CollapsingToolbarLayout>
 </android.support.design.widget.AppBarLayout>
-
+    <android.support.design.widget.FloatingActionButton
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/btnGetDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_direction"
+        app:backgroundTint="@android:color/white"
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:borderWidth="0dp"
+        app:useCompatPadding="true"/>
     <android.support.v4.widget.NestedScrollView
     android:clipToPadding="false"
     android:layout_width="match_parent"
@@ -74,7 +87,12 @@ tools:context="com.durgapoojamumbaipune.PoojaPandaDetail">
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+
+                </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/layout_price"
                     android:orientation="horizontal"
@@ -106,28 +124,6 @@ tools:context="com.durgapoojamumbaipune.PoojaPandaDetail">
                 android:layout_height="wrap_content" />
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <info.hoang8f.widget.FButton
-                android:id="@+id/btnGetDirection"
-                android:text="Get Direction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_margin="8dp"
-                android:layout_alignParentBottom="true"
-                app:buttonColor="@color/btnGetDirection"
-                app:shadowColor="@android:color/black"
-                app:shadowEnabled="true"
-                app:shadowHeight="5dp"
-                app:cornerRadius="4dp"/>
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

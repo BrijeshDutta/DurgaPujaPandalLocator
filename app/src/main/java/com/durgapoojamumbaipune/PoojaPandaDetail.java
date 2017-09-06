@@ -2,6 +2,7 @@ package com.durgapoojamumbaipune;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
     //UI variable
     TextView pandal_name,pandal_description;
     ImageView image_pandal;
-    FButton btnGetDirection;
+    FloatingActionButton btnGetDirection;
 
     String PandalId="",PandalName="";
 
@@ -50,7 +51,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
         pandal_name = (TextView) findViewById(R.id.pandal_name);
         pandal_description = (TextView) findViewById(R.id.pandal_description);
         image_pandal = (ImageView) findViewById(R.id.image_pandal);
-        btnGetDirection = (FButton) findViewById(R.id.btnGetDirection);
+        btnGetDirection = (FloatingActionButton) findViewById(R.id.btnGetDirection);
 
 
         //Init firebase

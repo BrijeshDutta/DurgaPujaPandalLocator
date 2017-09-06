@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ import info.hoang8f.widget.FButton;
 class PoojaPandalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView pandal_name, pandal_description;
-    public FButton btnGetDirection;
+    public ImageButton btnGetDirection;
     public CardView cardViewPoojaPandal;
 
     private ItemClickListener itemClickListener;
@@ -47,7 +48,7 @@ class PoojaPandalViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         pandal_name = (TextView) itemView.findViewById(R.id.pandal_name);
         pandal_description =(TextView) itemView.findViewById(R.id.pandal_description);
-        btnGetDirection = (FButton) itemView.findViewById(R.id.btnGetDirection);
+        btnGetDirection = (ImageButton) itemView.findViewById(R.id.btnGetDirection);
         cardViewPoojaPandal = (CardView) itemView.findViewById(R.id.cardViewPoojaPandal);
     }
 

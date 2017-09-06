@@ -10,16 +10,10 @@
     <LinearLayout
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="9"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/pandal_name"
@@ -29,30 +23,18 @@
                 android:textStyle="bold"
                 android:text="Pandal Name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/pandal_description"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical|start"
-                android:textStyle="italic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <info.hoang8f.widget.FButton
-                android:id="@+id/btnGetDirection"
-                android:text="Get Direction"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_margin="8dp"
-                android:layout_alignParentBottom="true"
-                app:buttonColor="@color/btnGetDirection"
-                app:shadowColor="@android:color/black"
-                app:shadowEnabled="true"
-                app:shadowHeight="5dp"
-                app:cornerRadius="4dp"/>
-        </LinearLayout>
+                android:layout_alignParentLeft="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btnGetDirection"
+            android:src="@drawable/ic_action_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"/>
+        </RelativeLayout>
     </LinearLayout>
-
 </android.support.v7.widget.CardView>
