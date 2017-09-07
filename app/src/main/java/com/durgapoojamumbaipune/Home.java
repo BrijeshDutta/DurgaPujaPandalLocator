@@ -124,10 +124,9 @@ public class Home extends AppCompatActivity {
     }
 
     private void initializeDailogUiComponents(View v) {
-        actvPersonName = (AutoCompleteTextView) v.findViewById(R.id.actvPersonName);
-        actvPersonMobileNo = (AutoCompleteTextView) v.findViewById(R.id.actvPersonMobileNo);
-        actvPersonEmailId = (AutoCompleteTextView) v.findViewById(R.id.actvPersonEmailId);
-        actvPersonDeposit = (AutoCompleteTextView) v.findViewById(R.id.actvPersonDeposit);
+        actvPersonName = (AutoCompleteTextView) v.findViewById(R.id.actvPandalName);
+        actvPersonMobileNo = (AutoCompleteTextView) v.findViewById(R.id.actvPandalDescription);
+        actvPersonEmailId = (AutoCompleteTextView) v.findViewById(R.id.actvPandalAddress);
     }
 
     private void loadCity() {
