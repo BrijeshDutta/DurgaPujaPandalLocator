@@ -8,4 +8,5 @@ public class Constants {
 
     public static final String CITI_DATABASE_REFERENCE = "City";
     public static final String POOJAPANDAL_DATABASE_REFERENCE = "PoojaPandal";
+    public static final String REQUEST_POOJAPANDAL_DATABASE_REFERENCE = "Requests";
 }

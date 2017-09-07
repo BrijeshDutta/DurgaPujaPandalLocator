@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,10 @@ import com.durgapoojamumbaipune.Interface.ItemClickListener;
 import com.durgapoojamumbaipune.ViewHolder.CityViewHolder;
 import com.durgapoojamumbaipune.constants.Constants;
 import com.durgapoojamumbaipune.model.City;
+import com.durgapoojamumbaipune.model.Request;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -30,12 +34,15 @@ import com.squareup.picasso.Picasso;
 public class Home extends AppCompatActivity {
 
     //UI Compoenents for adding a person to trip
-    AutoCompleteTextView actvPersonName,actvPersonMobileNo,actvPersonEmailId,actvPersonDeposit;
+    AutoCompleteTextView actvPandalName,actvPandalDescription,actvPandalAddress,actvPandalContactNumber;
+
     //.........VARIABLE RELATED TO PERSISTENCE.........//
     static boolean calledAlready = false;
 
     FirebaseDatabase database;
     DatabaseReference category;
+
+    DatabaseReference requests;
 
     private TextView textViewUserName;
     RecyclerView recycler_menu;
@@ -61,6 +68,7 @@ public class Home extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         category = database.getReference(Constants.CITI_DATABASE_REFERENCE);
+        requests = database.getReference(Constants.REQUEST_POOJAPANDAL_DATABASE_REFERENCE);
 
         //Load menu
 
@@ -115,6 +123,15 @@ public class Home extends AppCompatActivity {
 //                            createAddPersonCardView();
 //                            dialog.dismiss();
 //                        }
+                        Request request = new Request(actvPandalName.getText().toString(),
+                                actvPandalDescription.getText().toString(),actvPandalAddress.getText().toString(),actvPandalContactNumber.getText().toString());
+                        requests.child(String.valueOf(System.currentTimeMillis())).setValue(request).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(Home.this,"Request sent to the admin",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 });
             }
@@ -124,9 +141,10 @@ public class Home extends AppCompatActivity {
     }
 
     private void initializeDailogUiComponents(View v) {
-        actvPersonName = (AutoCompleteTextView) v.findViewById(R.id.actvPandalName);
-        actvPersonMobileNo = (AutoCompleteTextView) v.findViewById(R.id.actvPandalDescription);
-        actvPersonEmailId = (AutoCompleteTextView) v.findViewById(R.id.actvPandalAddress);
+        actvPandalName = (AutoCompleteTextView) v.findViewById(R.id.actvPandalName);
+        actvPandalDescription = (AutoCompleteTextView) v.findViewById(R.id.actvPandalDescription);
+        actvPandalAddress = (AutoCompleteTextView) v.findViewById(R.id.actvPandalAddress);
+        actvPandalContactNumber = (AutoCompleteTextView) v.findViewById(R.id.actvPandalContactNumber);
     }
 
     private void loadCity() {

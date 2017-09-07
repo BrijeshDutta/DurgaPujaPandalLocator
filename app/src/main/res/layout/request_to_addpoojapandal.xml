@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="Name"
+                    android:hint="Name"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:layout_marginLeft="10dp"
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="Description"
+                    android:hint="Description (Opt)"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:layout_marginLeft="10dp"
@@ -68,28 +68,26 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:text="Address"
+                    android:hint="Address(Google Maps)"
+                    android:singleLine="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvPandalContactNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:hint="Contact #(Opt)"
                     android:singleLine="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"/>
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:elevation="10dp"
-        android:id="@+id/cardViewTripDate"></android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:elevation="10dp"
-        android:id="@+id/cardViewTripCurrency"></android.support.v7.widget.CardView>
-
 </LinearLayout>
