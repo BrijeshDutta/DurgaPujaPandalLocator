@@ -117,20 +117,10 @@ public class Home extends AppCompatActivity {
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        getUserEnteredValuesForAddingPerson();
-//                        if(validateUserEnteredValues()){
-//                            addPersonDataToPersonObject();
-//                            createAddPersonCardView();
-//                            dialog.dismiss();
-//                        }
-                        Request request = new Request(actvPandalName.getText().toString(),
-                                actvPandalDescription.getText().toString(),actvPandalAddress.getText().toString(),actvPandalContactNumber.getText().toString());
-                        requests.child(String.valueOf(System.currentTimeMillis())).setValue(request).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(Home.this,"Request sent to the admin",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        if(validateUserEnteredValues()){
+                            processRequestInDatabase();
+                            dialog.dismiss();
+                        }
 
                     }
                 });
@@ -138,6 +128,34 @@ public class Home extends AppCompatActivity {
         });
         dialog.show();
 
+    }
+
+    private void processRequestInDatabase() {
+        Request request = new Request(actvPandalName.getText().toString(),
+                actvPandalDescription.getText().toString(),actvPandalAddress.getText().toString(),actvPandalContactNumber.getText().toString());
+        requests.child(String.valueOf(System.currentTimeMillis())).setValue(request).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(Home.this,"Request sent to the admin",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private boolean validateUserEnteredValues() {
+        boolean isValid = true;
+        View focusView = null;
+        if(actvPandalName.getText().toString().isEmpty()){
+            actvPandalName.setError(getString(R.string.pandalnameisrequired));
+            isValid = false;
+            focusView = actvPandalName;
+        }
+        else if(actvPandalAddress.getText().toString().isEmpty()){
+            actvPandalAddress.setError(getString(R.string.pandaladdressisrequired));
+            isValid = false;
+            focusView = actvPandalAddress;
+        }
+        return isValid;
     }
 
     private void initializeDailogUiComponents(View v) {

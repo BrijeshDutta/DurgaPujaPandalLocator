@@ -34,7 +34,7 @@ import info.hoang8f.widget.FButton;
 class PoojaPandalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView pandal_name, pandal_description;
-    public ImageButton btnGetDirection;
+    public ImageButton btnGetDirection,btnShare;
     public CardView cardViewPoojaPandal;
 
     private ItemClickListener itemClickListener;
@@ -50,6 +50,7 @@ class PoojaPandalViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         pandal_description =(TextView) itemView.findViewById(R.id.pandal_description);
         btnGetDirection = (ImageButton) itemView.findViewById(R.id.btnGetDirection);
         cardViewPoojaPandal = (CardView) itemView.findViewById(R.id.cardViewPoojaPandal);
+        btnShare = (ImageButton) itemView.findViewById(R.id.btnShare);
     }
 
     @Override
@@ -99,6 +100,20 @@ public class PoojaPandalAdapter extends  RecyclerView.Adapter<PoojaPandalViewHol
                 intentPoojaPandaDetail.putExtra("PandalId",listData.get(position).getPandalId());
                 intentPoojaPandaDetail.putExtra("PandalName",listData.get(position).getName());
                 context.startActivity(intentPoojaPandaDetail);
+            }
+        });
+
+        holder.btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,listData.get(position).getName()+"\n"
+                            +listData.get(position).getMapLink()+"\n"
+                            +context.getString(R.string.sentfromapp)+context.getString(R.string.app_name));
+
+                sendIntent.setType("text/plain");
+                context.startActivity(sendIntent);
             }
         });
     }
