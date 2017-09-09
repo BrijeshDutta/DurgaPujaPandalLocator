@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.durgapoojamumbaipune.ViewHolder.ReviewAdapter;
 import com.durgapoojamumbaipune.constants.Constants;
 import com.durgapoojamumbaipune.model.PoojaPandal;
 import com.durgapoojamumbaipune.model.Review;
@@ -33,7 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import info.hoang8f.widget.FButton;
@@ -54,6 +59,12 @@ public class PoojaPandaDetail extends AppCompatActivity {
     DatabaseReference poojaReview;
 
     PoojaPandal currentPoojaPandal;
+
+    //
+    RecyclerView recycler_reviews;
+    RecyclerView.LayoutManager layoutManager;
+    List<Review> reviewList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +87,11 @@ public class PoojaPandaDetail extends AppCompatActivity {
         btnSubmitReview = (ImageButton) findViewById(R.id.btnSubmitReview);
         etRewviewComments =(EditText) findViewById(R.id.etRewviewComments);
         tvError = (TextView) findViewById(R.id.tvError);
+        recycler_reviews = (RecyclerView) findViewById(R.id.recycler_reviews);
+        recycler_reviews.setHasFixedSize(true);
 
+        layoutManager = new LinearLayoutManager(this);
+        recycler_reviews.setLayoutManager(layoutManager);
         //Init firebase
 
         database = FirebaseDatabase.getInstance();
@@ -89,6 +104,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
             if (!PandalId.isEmpty() && PandalId !=null){
 
                 getPandalDetail(PandalId);
+                loadPandalReviews();
             }
         }
 
@@ -215,6 +231,39 @@ public class PoojaPandaDetail extends AppCompatActivity {
 
             }
         });
+
+    }
+    private void loadPandalReviews() {
+
+        final ReviewAdapter reviewAdapter = new ReviewAdapter(reviewList,PoojaPandaDetail.this);
+        poojaReview.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                reviewList.clear();
+                if (dataSnapshot.hasChildren()){
+                    for (DataSnapshot  poojaPandalDetailSnapshot : dataSnapshot.getChildren()){
+                        if (poojaPandalDetailSnapshot.hasChildren()){
+                            for (DataSnapshot reviewDataSnapshot : dataSnapshot.getChildren()){
+                                Review review = reviewDataSnapshot.getValue(Review.class);
+                                if (PandalId.equalsIgnoreCase(review.getPandalId())) {
+                                    //Toast.makeText(PoojaPandaDetail.this, "Name : " + review.getPandalId()+review.getRatings(), Toast.LENGTH_SHORT).show();
+                                    reviewList.add(0,review);
+                                    reviewAdapter.notifyDataSetChanged();
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        recycler_reviews.setAdapter(reviewAdapter);
 
     }
 }
