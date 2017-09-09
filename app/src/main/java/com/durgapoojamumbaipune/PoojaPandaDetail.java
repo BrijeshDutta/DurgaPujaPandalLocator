@@ -1,6 +1,7 @@
 package com.durgapoojamumbaipune;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -176,6 +178,9 @@ public class PoojaPandaDetail extends AppCompatActivity {
                         }else {
                             processAddReviewInDatabase();
                             etRewviewComments.setText(null);
+                            //hide soft keys
+                            InputMethodManager inputManager = (InputMethodManager) PoojaPandaDetail.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            inputManager.hideSoftInputFromWindow(PoojaPandaDetail.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             dialog.dismiss();
                         }
                     }
@@ -242,18 +247,12 @@ public class PoojaPandaDetail extends AppCompatActivity {
                 reviewList.clear();
                 if (dataSnapshot.hasChildren()){
                     for (DataSnapshot  poojaPandalDetailSnapshot : dataSnapshot.getChildren()){
-                        if (poojaPandalDetailSnapshot.hasChildren()){
-                            for (DataSnapshot reviewDataSnapshot : dataSnapshot.getChildren()){
-                                Review review = reviewDataSnapshot.getValue(Review.class);
+                                Review review = poojaPandalDetailSnapshot.getValue(Review.class);
                                 if (PandalId.equalsIgnoreCase(review.getPandalId())) {
-                                    //Toast.makeText(PoojaPandaDetail.this, "Name : " + review.getPandalId()+review.getRatings(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(PoojaPandaDetail.this, "Name : " + poojaPandalDetailSnapshot.toString(), Toast.LENGTH_SHORT).show();
                                     reviewList.add(0,review);
                                     reviewAdapter.notifyDataSetChanged();
                                 }
-
-                            }
-                        }
-
                     }
                 }
             }
