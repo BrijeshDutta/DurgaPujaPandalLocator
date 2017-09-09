@@ -35,6 +35,7 @@ dependencies {
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
+    compile 'me.zhanghai.android.materialratingbar:library:1.0.2'
     testCompile 'junit:junit:4.12'
 }
 
