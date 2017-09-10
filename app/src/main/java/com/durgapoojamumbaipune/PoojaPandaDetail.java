@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -53,6 +54,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
     ImageView image_pandal,btnSubmitReview;
     FloatingActionButton btnGetDirection;
     MaterialRatingBar ratings;
+    CardView cardViewReviewLIst;
 
     String PandalId="",PandalName="";
 
@@ -94,6 +96,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recycler_reviews.setLayoutManager(layoutManager);
+        cardViewReviewLIst = (CardView) findViewById(R.id.cardViewReviewLIst);
         //Init firebase
 
         database = FirebaseDatabase.getInstance();
@@ -181,6 +184,7 @@ public class PoojaPandaDetail extends AppCompatActivity {
                             //hide soft keys
                             InputMethodManager inputManager = (InputMethodManager) PoojaPandaDetail.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                             inputManager.hideSoftInputFromWindow(PoojaPandaDetail.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                            View view1 = cardViewReviewLIst;
                             dialog.dismiss();
                         }
                     }
